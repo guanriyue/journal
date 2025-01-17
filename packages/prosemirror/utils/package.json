@@ -1,0 +1,26 @@
+{
+  "name": "@journal/prosemirror-utils",
+  "private": true,
+  "version": "0.0.0",
+  "type": "module",
+  "exports": {
+    ".": {
+      "import": "./src/index.ts",
+      "require": "./src/index.ts",
+      "types": "./src/index.ts",
+      "default": "./src/index.ts"
+    }
+  },
+  "devDependencies": {
+    "@types/lodash-es": "^4.17.12",
+    "prosemirror-state": "^1.4.3",
+    "prosemirror-view": "^1.37.1"
+  },
+  "peerDependencies": {
+    "prosemirror-state": "^1.4.3",
+    "prosemirror-view": "^1.37.1"
+  },
+  "dependencies": {
+    "lodash-es": "^4.17.21"
+  }
+}
