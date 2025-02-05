@@ -7,18 +7,27 @@ import { autoUpdate, flip, hide, offset, shift, size, useFloating } from '@float
 import { useCallbackRef, useComposedRef } from '@journal/react-hooks';
 import { Primitive } from '@radix-ui/react-primitive';
 import { isFunction } from 'lodash-es';
+import { createPortal } from 'react-dom';
 
 export type * from '@journal/react-listbox';
 
 export { Empty, GroupLabel, Item, Group, List } from '@journal/react-listbox';
 
-interface SuggestionRootProps extends Omit<React.ComponentPropsWithoutRef<typeof Primitive.div>, 'onSelect'>, Pick<ListBoxRootProps, 'onHighlight'>, Pick<SuggestionConfig, 'matcher'> {
+interface SuggestionRootProps
+  extends Omit<React.ComponentPropsWithoutRef<typeof Primitive.div>, 'onSelect'>,
+    Pick<ListBoxRootProps, 'onHighlight'>,
+    Pick<SuggestionConfig, 'matcher'> {
   view: EditorView;
+
+  /**
+   * portal container 元素。默认为 document.body
+   */
+  container?: Element | null;
 
   /**
    * 触发 suggest 时调用
    * @param query 查询的关键字。可能为空，代表刚触发
-   * @returns 
+   * @returns
    */
   onSearch?: (query: string) => void;
 
@@ -35,7 +44,7 @@ const useZIndex = (ref: React.ForwardedRef<HTMLDivElement>) => {
 
   const setZIndex = useCallback((el: HTMLDivElement | null) => {
     if (el) {
-      rawSetZIndex(window.getComputedStyle(el).zIndex)
+      rawSetZIndex(window.getComputedStyle(el).zIndex);
     }
   }, []);
 
@@ -43,12 +52,12 @@ const useZIndex = (ref: React.ForwardedRef<HTMLDivElement>) => {
 
   return {
     zIndex,
-    composedRef
+    composedRef,
   };
 };
 
 export const Root = forwardRef<HTMLDivElement, SuggestionRootProps>((props, ref) => {
-  const { view, matcher, onSearch: propOnSearch, onSelect, onHighlight, ...contentProps } = props;
+  const { view, container, matcher, onSearch: propOnSearch, onSelect, onHighlight, ...contentProps } = props;
 
   const matcherFnRef = useCallbackRef(isFunction(matcher) ? matcher : undefined);
   const finalMatcher = isFunction(matcher) ? matcherFnRef : matcher;
@@ -121,14 +130,14 @@ export const Root = forwardRef<HTMLDivElement, SuggestionRootProps>((props, ref)
     ],
   });
 
-  const { composedRef, zIndex } = useZIndex(ref)
+  const { composedRef, zIndex } = useZIndex(ref);
   const [placedSide, placedAlign] = placement.split('-');
 
   if (!open) {
     return null;
   }
 
-  return (
+  return createPortal(
     <div
       ref={refs.setFloating}
       data-radix-popper-content-wrapper=""
@@ -154,11 +163,16 @@ export const Root = forwardRef<HTMLDivElement, SuggestionRootProps>((props, ref)
           animation: !isPositioned ? 'none' : undefined,
         }}
       >
-        <ListBoxRoot ref={listBoxRef} onSelect={value => onSelect?.(value, rangeRef.current!)} onHighlight={onHighlight}>
+        <ListBoxRoot
+          ref={listBoxRef}
+          onSelect={(value) => onSelect?.(value, rangeRef.current!)}
+          onHighlight={onHighlight}
+        >
           {props.children}
         </ListBoxRoot>
       </Primitive.div>
-    </div>
+    </div>,
+    container || document.body
   );
 });
 
