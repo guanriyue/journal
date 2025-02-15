@@ -1,0 +1,38 @@
+{
+  "name": "@journal/prosemirror-event-provider",
+  "sideEffect": false,
+  "private": true,
+  "version": "0.0.0",
+  "type": "module",
+  "exports": {
+    ".": {
+      "import": "./src/index.ts",
+      "require": "./src/index.ts",
+      "types": "./src/index.ts",
+      "default": "./src/index.ts"
+    }
+  },
+  "dependencies": {
+    "@journal/prosemirror-utils": "workspace:^",
+    "eventemitter3": "^5.0.1",
+    "lodash-es": "*"
+  },
+  "devDependencies": {
+    "@types/lodash-es": "^4.17.12",
+    "@types/react": "^18.0 || ^19.0",
+    "@types/react-dom": "^18.0 || ^19.0",
+    "prosemirror-model": "^1.24.1",
+    "prosemirror-state": "^1.4.3",
+    "prosemirror-view": "^1.37.1"
+  },
+  "peerDependencies": {
+    "prosemirror-model": "^1",
+    "prosemirror-state": "^1",
+    "prosemirror-view": "^1"
+  },
+  "peerDependenciesMeta": {
+    "@types/react": {
+      "optional": true
+    }
+  }
+}
