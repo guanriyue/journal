@@ -1,0 +1,16 @@
+{
+  "name": "@journal/singleton-resize-observer",
+  "private": true,
+  "version": "1.0.0",
+  "exports": {
+    ".": {
+      "types": "./src/index.ts",
+      "require": "./src/index.ts",
+      "default": "./src/index.ts",
+      "import": "./src/index.ts"
+    }
+  },
+  "devDependencies": {
+    "typescript": "^5.7.2"
+  }
+}
