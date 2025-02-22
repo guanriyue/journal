@@ -1,0 +1,160 @@
+.ProseMirror [data-node-type="table"] {
+  position: relative;
+}
+
+.ProseMirror .table-scroll-wrapper {
+  max-width: 100%;
+  overflow-x: scroll;
+}
+
+.ProseMirror [data-table-operation-area] {
+  position: absolute;
+  width: 0;
+  height: 0;
+  left: 0;
+  top: 0;
+}
+
+/** column operation **/
+
+.ProseMirror [data-column-operation-bar] {
+  width: var(--table-viewport-width);
+  position: absolute;
+  left: 0;
+  bottom: 100%;
+}
+
+.ProseMirror [data-column-insert-bar-wrapper] {
+  margin-inline: -8px;
+  padding-inline: 8px;
+  box-sizing: border-box;
+  overflow: hidden;
+}
+
+.ProseMirror [data-column-insert-bar] {
+  transform: translateX(calc(var(--scroll-left) * -1));
+  display: flex;
+  height: 16px;
+  width: fit-content;
+}
+
+.ProseMirror [data-column-insert-bar-item] {
+  position: relative;
+  display: block;
+  width: 16px;
+  height: 16px;
+  cursor: pointer;
+}
+
+.ProseMirror [data-column-insert-bar-item]::after {
+  content: '';
+  display: block;
+  width: 4px;
+  height: 4px;
+  border-radius: 50%;
+  background-color: #ccc;
+  position: absolute;
+  left: 50%;
+  top: 50%;
+  margin-top: -2px;
+  margin-left: -2px;
+}
+
+.ProseMirror [data-column-select-bar-wrapper] {
+  height: 8px;
+  overflow: hidden;
+}
+
+.ProseMirror [data-column-select-bar] {
+  transform: translateX(calc(var(--scroll-left) * -1));
+  display: flex;
+  height: 8px;
+  width: fit-content;
+}
+
+.ProseMirror [data-column-select-bar-item] {
+  display: block;
+  height: 100%;
+  background-color: #eee;
+  cursor: pointer;
+}
+
+.ProseMirror [data-column-select-bar-item]:first-child {
+  border-top-left-radius: 3px;
+}
+
+.ProseMirror [data-column-select-bar-item]:last-child {
+  border-top-right-radius: 3px;
+}
+
+.ProseMirror [data-column-select-bar-item][data-active] {
+  background-color: #2b7fff;
+}
+
+.ProseMirror [data-column-select-bar-item]:not([data-active]):hover {
+  background-color: #c4c4c4;
+}
+
+/** row operation **/
+
+.ProseMirror [data-row-operation-bar] {
+  height: var(--table-viewport-height);
+  position: absolute;
+  top: 0;
+  right: 100%;
+  display: flex;
+}
+
+.ProseMirror [data-row-insert-bar] {
+  width: 16px;
+}
+
+.ProseMirror [data-row-insert-bar-item] {
+  position: relative;
+  display: block;
+  width: 16px;
+  height: 16px;
+  cursor: pointer;
+}
+
+.ProseMirror [data-row-insert-bar-item]::after {
+  content: '';
+  display: block;
+  width: 4px;
+  height: 4px;
+  border-radius: 50%;
+  background-color: #ccc;
+  position: absolute;
+  left: 50%;
+  top: 50%;
+  margin-top: -2px;
+  margin-left: -2px;
+}
+
+.ProseMirror [data-row-select-bar] {
+  width: 8px;
+  height: 100%;
+}
+
+.ProseMirror [data-row-select-bar-item] {
+  display: block;
+  width: 100%;
+  background-color: #eee;
+  cursor: pointer;
+}
+
+.ProseMirror [data-row-select-bar-item]:first-child {
+  border-top-left-radius: 3px;
+}
+
+.ProseMirror [data-row-select-bar-item]:last-child {
+  border-bottom-left-radius: 3px;
+}
+
+.ProseMirror [data-row-select-bar-item][data-active] {
+  background-color: #2b7fff;
+}
+
+.ProseMirror [data-row-select-bar-item]:not([data-active]):hover {
+  background-color: #c4c4c4;
+}

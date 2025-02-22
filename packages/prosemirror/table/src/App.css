@@ -1,0 +1,196 @@
+body {
+  margin: 0;
+  font-family: Inter, Avenir, Helvetica, Arial, sans-serif;
+}
+
+.content {
+  height: 100vh;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.ProseMirror {
+  background-color: #fff;
+  width: 500px;
+  height: 80vh;
+  border-top: 2px solid gray;
+  border-bottom: 2px solid gray;
+  padding: 4px 12px;
+  outline: none;
+}
+
+/** table style from https://prosemirror-tables.netlify.app/ */
+
+.ProseMirror table {
+  margin: 0;
+}
+
+.ProseMirror th,
+.ProseMirror td {
+  min-width: 1em;
+  border: 1px solid #ddd;
+  padding: 3px 5px;
+}
+
+.ProseMirror .tableWrapper {
+  margin: 1em 0;
+}
+
+.ProseMirror th {
+  font-weight: bold;
+  text-align: left;
+}
+
+.ProseMirror table {
+  border-collapse: collapse;
+  table-layout: fixed;
+  width: 100%;
+  overflow: hidden
+}
+
+.ProseMirror td,.ProseMirror th {
+  vertical-align: top;
+  box-sizing: border-box;
+  position: relative
+}
+
+.ProseMirror td:not([data-colwidth]):not(.column-resize-dragging),.ProseMirror th:not([data-colwidth]):not(.column-resize-dragging) {
+  min-width: var(--default-cell-min-width)
+}
+
+.ProseMirror .column-resize-handle {
+  position: absolute;
+  right: -2px;
+  top: 0;
+  bottom: 0;
+  width: 4px;
+  z-index: 20;
+  background-color: rgb(43 127 255);
+  pointer-events: none
+}
+
+.ProseMirror.resize-cursor {
+  cursor: ew-resize;
+  cursor: col-resize
+}
+
+.ProseMirror .selectedCell:after {
+  z-index: 2;
+  position: absolute;
+  content: "";
+  left: 0;
+  right: 0;
+  top: 0;
+  bottom: 0;
+  background: #c8c8ff66;
+  pointer-events: none
+}
+
+/** end */
+
+.column-insert-indicator {
+  position: relative;
+}
+
+.column-insert-indicator::after {
+  content: '';
+  display: block;
+  position: absolute;
+  left: 50%;
+  top: 100%;
+  width: 2px;
+  height: calc(var(--table-viewport-height) + 8px);
+  margin-left: -1px;
+  background-color: rgb(43 127 255);
+  pointer-events: none;
+}
+
+.column-insert-icon {
+  display: block;
+  cursor: pointer;
+  color: rgb(43 127 255);
+}
+
+.row-insert-indicator {
+  position: relative;
+}
+
+.row-insert-icon {
+  display: block;
+  cursor: pointer;
+  color: rgb(43 127 255);
+  transform: rotate(-90deg);
+}
+
+.row-insert-indicator::after {
+  content: '';
+  display: block;
+  position: absolute;
+  left: 100%;
+  top: 50%;
+  height: 2px;
+  width: calc(var(--table-viewport-width) + 8px);
+  margin-top: -1px;
+  background-color: rgb(43 127 255);
+  pointer-events: none;
+}
+
+.insert-tooltip {
+  border-radius: 4px;
+	padding: 10px 15px;
+	font-size: 15px;
+	line-height: 1;
+	background-color: white;
+	box-shadow:
+		hsl(206 22% 7% / 35%) 0px 10px 38px -10px,
+		hsl(206 22% 7% / 20%) 0px 10px 20px -15px;
+	user-select: none;
+	will-change: transform, opacity;
+}
+
+.table-floating-menu {
+  padding: 4px;
+  border: 1px solid #ccc;
+  border-radius: 4px;
+  background-color: #fff;
+  box-sizing: border-box;
+  display: flex;
+  align-items: center;
+  gap: 8px;
+}
+
+.table-floating-menu > button {
+  border: none;
+  border-radius: 4px;
+  width: 32px;
+  height: 32px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  cursor: pointer;
+  user-select: none;
+  background-color: transparent;
+}
+
+.table-floating-menu > button.danger {
+  color: rgb(251 44 54);
+}
+
+.table-floating-menu > button:disabled {
+  color: #888;
+  cursor: not-allowed;
+}
+
+.table-floating-menu > button:not(:disabled)[data-state='on'] {
+  color: rgb(43 127 255);
+  background-color: rgb(219 234 254);
+}
+
+.table-floating-menu > button:not(:disabled):hover {
+  background-color: #eee;
+}
+
+.table-floating-menu > button.danger:not(:disabled):hover {
+  background-color: rgb(255 226 226);
+}
