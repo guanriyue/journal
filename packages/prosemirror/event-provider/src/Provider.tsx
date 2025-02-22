@@ -55,7 +55,7 @@ export const EditorEventProvider = (props: EditorEventProviderProps) => {
 
   const contextValue = useMemo<ProseMirrorEventContextValue>(() => {
     // eslint-disable-next-line @typescript-eslint/no-explicit-any
-    const register = <Event extends keyof EditorEvents>(e: Event, callback: any) => {
+    const listen = <Event extends keyof EditorEvents>(e: Event, callback: any) => {
       eventEmitter.on(e, callback);
 
       return () => {
@@ -65,8 +65,8 @@ export const EditorEventProvider = (props: EditorEventProviderProps) => {
 
     return {
       view,
-      register,
-      subscribe: onUpdate => register('update', onUpdate),
+      listen,
+      subscribe: onUpdate => listen('update', onUpdate),
     };
   }, [view]);
 

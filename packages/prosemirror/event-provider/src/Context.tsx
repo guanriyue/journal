@@ -11,7 +11,7 @@ export type EditorEvents = {
 
 export type ProseMirrorEventContextValue = {
   view: EditorView;
-  register: <Event extends keyof EditorEvents>(e: Event, callback: EditorEvents[Event]) => () => void;
+  listen: <Event extends keyof EditorEvents>(e: Event, callback: EditorEvents[Event]) => () => void;
   subscribe: (onUpdate: () => void) => () => void;
 };
 
@@ -41,8 +41,8 @@ export const useEditorState = <T,>(selector: (view: EditorView) => T) => {
   );
 };
 
-export const useEditorEventRegister = () => {
+export const useEditorEventListener = () => {
   const context = useEditorEventContext();
 
-  return context.register;
+  return context.listen;
 };
