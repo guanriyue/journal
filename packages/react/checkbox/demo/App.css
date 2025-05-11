@@ -1,0 +1,49 @@
+body {
+  margin: 0;
+  font-family: Inter, Avenir, Helvetica, Arial, sans-serif;
+}
+
+.content {
+  margin: auto;
+  width: fit-content;
+  min-height: 100vh;
+  display: flex;
+  align-items: center;
+}
+
+label {
+  width: 100%;
+  display: flex;
+  gap: 0.5em;
+  align-items: center;
+  font-size: 1.2rem;
+  font-weight: 400;
+  text-decoration: none;
+}
+
+label > span {
+  cursor: pointer;
+}
+
+.actions {
+  display: flex;
+  gap: 1em;
+}
+
+.actions > label {
+  width: auto;
+}
+
+.actions > button {
+  padding: 2px 4px;
+  border-radius: 2px;
+  border: none;
+  color: #007bff;
+  font-size: 1rem;
+  cursor: pointer;
+  background-color: transparent;
+}
+
+.section-content {
+  padding-left: 1em;
+}
